@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://npmcdn.com/contentful@3.3.5/browser-dist/contentful.js"></script>
+    <script src="https://npmcdn.com/marked@0.3.5/marked.min.js"></script>
+    <script src="script.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
+  </head>
+  <body>
+    <h1>Hello there!</h1>
+    <a href="/me.html">My other page</a>
+    <div id="content" class="content-container"></div>
+    <script>
+      var contentfulClient = contentful.createClient({
+        accessToken:
+          "0e3ec801b5af550c8a1257e8623b1c77ac9b3d8fcfc1b2b7494e3cb77878f92a",
+        space: "wl1z0pal05vy"
+      });
+
+      var PRODUCT_CONTENT_TYPE_ID = "2PqfXUJwE8qSYKuM0U6w8M";
+      contentfulClient
+        .getEntries({
+          content_type: PRODUCT_CONTENT_TYPE_ID
+        })
+        .then(function(entries) {
+          document.getElementById("content").innerHTML = renderProducts(
+            entries.items
+          );
+        });
+    </script>
+  </body>
+</html>
